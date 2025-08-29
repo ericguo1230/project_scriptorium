@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply h-full;
+}
+
+body {
+  @apply h-full;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+.flexlayout__splitter {
+  z-index: 0 !important;
+}
+
+.flexlayout__splitter_drag {
+  z-index: 0 !important;
+}

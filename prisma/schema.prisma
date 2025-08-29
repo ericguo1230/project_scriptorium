@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["omitApi"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int     @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  email       String  @unique
+  password    String
+  role        String  @default("user")
+  avatar      String  @default("/blobs/default-avatar.png")
+  phoneNumber String?
+
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  Template      Template[]
+  comments      Comment[]
+  blogPosts     BlogPost[]
+  reports       Report[]
+  ratings       Rating[]
+  codeExecution CodeExecution[]
+}
+
+model Template {
+  id           Int       @id @default(autoincrement())
+  title        String
+  description  String
+  code         String
+  stdin        String?
+  language     String
+  isForked     Boolean
+  forkedFrom   Template? @relation("ForkedFrom", fields: [forkedFromId], references: [id], onDelete: SetNull)
+  forkedFromId Int?
+  user         User      @relation(fields: [userId], references: [id])
+  userId       Int
+
+  tamplateTags TemplateTag[]
+  forks        Template[]    @relation("ForkedFrom")
+  blogPosts    BlogPost[]    @relation("BlogPostTemplates")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, forkedFromId])
+  @@unique([userId, title])
+}
+
+model TemplateTag {
+  id  Int    @id @default(autoincrement())
+  tag String @unique
+
+  templates Template[]
+}
+
+model BlogPost {
+  id          Int           @id @default(autoincrement())
+  title       String
+  description String
+  links       Template[]    @relation("BlogPostTemplates")
+  user        User          @relation(fields: [userId], references: [id])
+  userId      Int
+  comments    Comment[]
+  reports     Report[]
+  isVisible   Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  tags        BlogPostTag[]
+  ratings     Rating[]
+}
+
+model BlogPostTag {
+  id  Int    @id @default(autoincrement())
+  tag String @unique
+
+  blogPosts BlogPost[]
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  content    String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  blogPost   BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  blogPostId Int
+  parent     Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId   Int?
+
+  reports   Report[]
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ratings Rating[]
+  replies Comment[] @relation("CommentReplies")
+}
+
+model Report {
+  id          Int       @id @default(autoincrement())
+  explanation String
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  blogPost    BlogPost? @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  blogPostId  Int?
+  comment     Comment?  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId   Int?
+  status      String    @default("open")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, blogPostId])
+  @@unique([userId, commentId])
+}
+
+model Rating {
+  id         Int       @id @default(autoincrement())
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int
+  blogPost   BlogPost? @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+  blogPostId Int?
+  comment    Comment?  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId  Int?
+  rating     String
+
+  @@unique([userId, blogPostId])
+  @@unique([userId, commentId])
+}
+
+model CodeExecution {
+  id              Int     @id @default(autoincrement())
+  language        String
+  code            String
+  stdin           String?
+  stdout          String?
+  stderr          String?
+  executionTimeMs Int?
+  exitCode        Int?
+  status          String  @default("pending")
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

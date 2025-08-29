@@ -1,0 +1,3420 @@
+{
+  "info": {
+    "_postman_id": "7486824a-758a-44bb-953b-1b0bf747fc3c",
+    "name": "CSC309 Part 1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22536138",
+    "_collection_link": "https://cloudy-rocket-784560.postman.co/workspace/CSC309~04f092af-1a51-45dc-96a6-9374283cbe0c/collection/22536138-7486824a-758a-44bb-953b-1b0bf747fc3c?action=share&source=collection_link&creator=22536138"
+  },
+  "item": [
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "Sign up",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"David\",\n    \"lastName\": \"Lin\",\n    \"email\": \"david@utoronto.ca\",\n    \"password\": \"password123\",\n    \"confirmPassword\": \"password123\",\n    \"phoneNumber\": \"1234567899\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "auth", "register"]
+            },
+            "description": "As a user, I want to sign up, log in, log out, and edit my profile. Profile information should include first and last name, email, profile picture (or avatar), and phone number. Authentication should be handled with a proper JWT setup."
+          },
+          "response": [
+            {
+              "name": "Valid account",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"firstName\": \"David\",\n    \"lastName\": \"Lin\",\n    \"email\": \"david@utoronto.ca\",\n    \"password\": \"password123\",\n    \"confirmPassword\": \"password123\",\n    \"phoneNumber\": \"1234567899\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/register",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "register"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 2,\n        \"firstName\": \"David\",\n        \"lastName\": \"Lin\",\n        \"email\": \"david@utoronto.ca\",\n        \"role\": \"user\",\n        \"avatar\": null,\n        \"phoneNumber\": \"1234567899\",\n        \"createdAt\": \"2024-10-31T21:18:25.199Z\",\n        \"updatedAt\": \"2024-10-31T21:18:25.199Z\"\n    }\n}"
+            },
+            {
+              "name": "Invalid input",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"firstName\": \"David\",\n    \"lastName\": \"Lin\",\n    \"confirmPassword\": \"password123\",\n    \"phoneNumber\": \"1234567899\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/register",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "register"]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"Unprocessable Entity\",\n    \"message\": {\n        \"_errors\": [],\n        \"body\": {\n            \"_errors\": [],\n            \"email\": {\n                \"_errors\": [\n                    \"Required\"\n                ]\n            },\n            \"password\": {\n                \"_errors\": [\n                    \"Required\"\n                ]\n            }\n        }\n    }\n}"
+            },
+            {
+              "name": "Password don't match",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"firstName\": \"David\",\n    \"lastName\": \"Lin\",\n    \"email\": \"david@utoronto.ca\",\n    \"password\": \"password123\",\n    \"confirmPassword\": \"123\",\n    \"phoneNumber\": \"1234567899\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/register",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "register"]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"Unprocessable Entity\",\n    \"message\": {\n        \"_errors\": [],\n        \"body\": {\n            \"_errors\": [],\n            \"password\": {\n                \"_errors\": [\n                    \"Passwords do not match\"\n                ]\n            }\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Avatar",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "postman-cloud:///1ef9629a-eccf-4d30-8c3a-c76d4a79f4de"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/me/avatar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "me", "avatar"]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Avatar",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": "postman-cloud:///1ef9629a-eccf-4d30-8c3a-c76d4a79f4de"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/me/avatar",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "me", "avatar"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"filename\": \"default-avatar.png\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"david@utoronto.ca\",\n    \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "auth", "login"]
+            }
+          },
+          "response": [
+            {
+              "name": "Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"david@utoronto.ca\",\n    \"password\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUm9sZSI6InVzZXIiLCJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3MzA2NDczNTgsInN1YiI6IjIiLCJleHAiOjE3MzA2NDgyNTh9.XQjwpJg8qxam_eEfsJup1zWPEUgAC0TD1SiuBhcYAhA\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJyZWZyZXNoIiwiaWF0IjoxNzMwNjQ3MzU4LCJzdWIiOiIyIiwiZXhwIjoxNzMxMjUyMTU4fQ.MQPxx1JUSwqxT2qlHyW-5FJKg-TXX1MqOBo29TMy0tk\"\n    }\n}"
+            },
+            {
+              "name": "Login unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"david@canada.ca\",\n    \"password\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"User with given credentials not found\"\n}"
+            },
+            {
+              "name": "Login admin",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"LeFlop23\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUm9sZSI6ImFkbWluIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwiaWF0IjoxNzMwNjQ3MzY4LCJzdWIiOiIxIiwiZXhwIjoxNzMwNjQ4MjY4fQ.eyfBzV5D7bn4kYoYyV9WDFUaiHF2H06nKKzqwuFV88k\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJyZWZyZXNoIiwiaWF0IjoxNzMwNjQ3MzY4LCJzdWIiOiIxIiwiZXhwIjoxNzMxMjUyMTY4fQ.0GTu7R2seZAtafpB2XuiJODBHceVRwxYhrwGbKN4if4\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJyZWZyZXNoIiwiaWF0IjoxNzMwMjI4NDkyLCJzdWIiOiIyIiwiZXhwIjoxNzMwODMzMjkyfQ.Ag1tibIwJhiwsf_YKQd5Hyy_m_WOoNyHn8CK7pz3Jg8\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/auth/refresh",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "auth", "refresh"]
+            }
+          },
+          "response": [
+            {
+              "name": "Valid refresh token",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJyZWZyZXNoIiwiaWF0IjoxNzMwMjI4NDkyLCJzdWIiOiIyIiwiZXhwIjoxNzMwODMzMjkyfQ.Ag1tibIwJhiwsf_YKQd5Hyy_m_WOoNyHn8CK7pz3Jg8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/refresh",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "refresh"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUm9sZSI6InVzZXIiLCJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3MzA0MDk4MDIsInN1YiI6IjIiLCJleHAiOjE3MzA0MTA3MDJ9.8aqnhRQ1ggEY6K-tQayIckVOhaBmUkAX7t3GfTqKqR8\"\n    }\n}"
+            },
+            {
+              "name": "Invalid refresh token",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"refreshToken\": \"abc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/refresh",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "refresh"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"Unauthorized\",\n    \"message\": \"Invalid Token\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"Steph\",\n    \"lastName\": \"Curry\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "me"]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Profile",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"firstName\": \"Steph\",\n    \"lastName\": \"Curry\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/me",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "me"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"firstName\": \"Steph\",\n        \"lastName\": \"Curry\",\n        \"email\": \"admin@example.com\",\n        \"role\": \"admin\",\n        \"avatar\": null,\n        \"phoneNumber\": \"1234567890\",\n        \"createdAt\": \"2024-10-31T21:17:50.674Z\",\n        \"updatedAt\": \"2024-10-31T21:24:09.854Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Authenticated User Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "me"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Authenticated User Profile",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/me",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "me"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"firstName\": \"Steph\",\n        \"lastName\": \"Curry\",\n        \"email\": \"admin@example.com\",\n        \"role\": \"admin\",\n        \"avatar\": \"/uploads/default-avatar.png\",\n        \"phoneNumber\": \"1234567890\",\n        \"createdAt\": \"2024-10-31T21:17:50.674Z\",\n        \"updatedAt\": \"2024-10-31T21:24:24.672Z\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Execution",
+      "item": [
+        {
+          "name": "Execute",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"code\": \"class HelloWorld {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n    \"language\": \"java\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/execute",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "execute"]
+            }
+          },
+          "response": [
+            {
+              "name": "Execute Java",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"code\": \"class HelloWorld {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n    \"language\": \"java\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/execute",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "execute"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 9,\n        \"language\": \"java\",\n        \"code\": \"class HelloWorld {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n        \"stdin\": null,\n        \"compileStdout\": \"\",\n        \"compileStderr\": \"\",\n        \"stdout\": \"Hello, World!\\n\",\n        \"stderr\": \"\",\n        \"executionTimeMs\": 300,\n        \"compileTimeMs\": 299,\n        \"exitCode\": 0,\n        \"status\": \"completed\",\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-03T13:32:52.749Z\"\n    }\n}"
+            },
+            {
+              "name": "Execute Java with compile error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"code\": \"class {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n    \"language\": \"java\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/execute",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "execute"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 8,\n        \"language\": \"java\",\n        \"code\": \"class {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n        \"stdin\": null,\n        \"compileStdout\": \"\",\n        \"compileStderr\": \".executions/8/Code.java:1: error: <identifier> expected\\nclass {\\n     ^\\n1 error\\n\",\n        \"stdout\": \"\",\n        \"stderr\": \"\",\n        \"executionTimeMs\": null,\n        \"compileTimeMs\": null,\n        \"exitCode\": 1,\n        \"status\": \"completed\",\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-03T13:32:45.649Z\"\n    }\n}"
+            },
+            {
+              "name": "Execute Python",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"code\": \"print(\\\"Hello World!\\\")\",\n    \"language\": \"python\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/execute",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "execute"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 7,\n        \"language\": \"python\",\n        \"code\": \"print(\\\"Hello World!\\\")\",\n        \"stdin\": null,\n        \"compileStdout\": null,\n        \"compileStderr\": null,\n        \"stdout\": \"Hello World!\\n\",\n        \"stderr\": \"\",\n        \"executionTimeMs\": 25,\n        \"compileTimeMs\": null,\n        \"exitCode\": 0,\n        \"status\": \"completed\",\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-03T13:32:40.913Z\"\n    }\n}"
+            },
+            {
+              "name": "Execute Python with stdin",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"code\": \"name = input()\\nprint(f\\\"Hello {name}\\\")\",\n    \"language\": \"python\",\n    \"stdin\": \"World\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/execute",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "execute"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 6,\n        \"language\": \"python\",\n        \"code\": \"name = input()\\nprint(f\\\"Hello {name}\\\")\",\n        \"stdin\": \"World\",\n        \"compileStdout\": null,\n        \"compileStderr\": null,\n        \"stdout\": \"Hello World\\n\",\n        \"stderr\": \"\",\n        \"executionTimeMs\": 27,\n        \"compileTimeMs\": null,\n        \"exitCode\": 0,\n        \"status\": \"completed\",\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-03T13:32:35.011Z\"\n    }\n}"
+            },
+            {
+              "name": "Execute C",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"code\": \"#include <stdio.h>\\nint main() {\\n   // printf() displays the string inside quotation\\n   printf(\\\"Hello, World!\\\");\\n   return 0;\\n}\",\n    \"language\": \"c\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/execute",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "execute"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 26,\n        \"language\": \"c\",\n        \"code\": \"#include <stdio.h>\\nint main() {\\n   // printf() displays the string inside quotation\\n   printf(\\\"Hello, World!\\\");\\n   return 0;\\n}\",\n        \"stdin\": null,\n        \"compileStdout\": \"\",\n        \"compileStderr\": \"\",\n        \"isCompiled\": true,\n        \"stdout\": \"Hello, World!\",\n        \"stderr\": \"\",\n        \"executionTimeMs\": 7,\n        \"compileTimeMs\": 36,\n        \"exitCode\": 0,\n        \"status\": \"completed\",\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-03T15:26:31.789Z\"\n    }\n}"
+            },
+            {
+              "name": "Execute C++",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"code\": \"#include <iostream>\\n\\nint main() {\\n    std::cout << \\\"Hello World!\\\";\\n    return 0;\\n}\",\n    \"language\": \"cpp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/execute",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "execute"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 27,\n        \"language\": \"cpp\",\n        \"code\": \"#include <iostream>\\n\\nint main() {\\n    std::cout << \\\"Hello World!\\\";\\n    return 0;\\n}\",\n        \"stdin\": null,\n        \"compileStdout\": \"\",\n        \"compileStderr\": \"\",\n        \"isCompiled\": true,\n        \"stdout\": \"Hello World!\",\n        \"stderr\": \"\",\n        \"executionTimeMs\": 8,\n        \"compileTimeMs\": 230,\n        \"exitCode\": 0,\n        \"status\": \"completed\",\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-03T15:27:19.913Z\"\n    }\n}"
+            },
+            {
+              "name": "Execute JavaScript",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"code\": \"console.log(\\\"Hello World!\\\");\",\n    \"language\": \"javascript\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/execute",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "execute"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 28,\n        \"language\": \"javascript\",\n        \"code\": \"console.log(\\\"Hello World!\\\");\",\n        \"stdin\": null,\n        \"compileStdout\": null,\n        \"compileStderr\": null,\n        \"isCompiled\": true,\n        \"stdout\": \"Hello World!\\n\",\n        \"stderr\": \"\",\n        \"executionTimeMs\": 36,\n        \"compileTimeMs\": null,\n        \"exitCode\": 0,\n        \"status\": \"completed\",\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-03T15:28:01.712Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Execute as Visitor",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"code\": \"class HelloWorld {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n    \"language\": \"java\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/execute",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "execute"]
+            }
+          },
+          "response": [
+            {
+              "name": "Execute as Visitor",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"code\": \"class HelloWorld {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n    \"language\": \"java\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/execute",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "execute"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 24,\n        \"language\": \"java\",\n        \"code\": \"class HelloWorld {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n        \"stdin\": null,\n        \"compileStdout\": \"\",\n        \"compileStderr\": \"\",\n        \"isCompiled\": true,\n        \"stdout\": \"Hello, World!\\n\",\n        \"stderr\": \"\",\n        \"executionTimeMs\": 305,\n        \"compileTimeMs\": 302,\n        \"exitCode\": 0,\n        \"status\": \"completed\",\n        \"userId\": null,\n        \"createdAt\": \"2024-11-03T15:25:26.832Z\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Code Templates",
+      "item": [
+        {
+          "name": "Get Templates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/templates",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "templates"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get all templates",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Hello World\",\n            \"description\": \"Code for printing hello world in Python\",\n            \"code\": \"print(\\\"hello world!\\\")\",\n            \"stdin\": null,\n            \"language\": \"python\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-10-31T21:35:16.514Z\",\n            \"updatedAt\": \"2024-10-31T21:35:16.514Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"Python\"\n                }\n            ]\n        }\n    ]\n}"
+            },
+            {
+              "name": "Get all templates with pagination",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "Search template by title",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates?title=hello world",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "hello world"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Hello World\",\n            \"description\": \"Code for printing hello world in Python\",\n            \"code\": \"print(\\\"hello world!\\\")\",\n            \"stdin\": null,\n            \"language\": \"python\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-10-31T21:35:16.514Z\",\n            \"updatedAt\": \"2024-10-31T21:35:16.514Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"Python\"\n                }\n            ]\n        }\n    ]\n}"
+            },
+            {
+              "name": "Search templates by description",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates?description=python",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"],
+                  "query": [
+                    {
+                      "key": "description",
+                      "value": "python"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Hello World\",\n            \"description\": \"Code for printing hello world in Python\",\n            \"code\": \"print(\\\"hello world!\\\")\",\n            \"stdin\": null,\n            \"language\": \"python\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-10-31T21:35:16.514Z\",\n            \"updatedAt\": \"2024-10-31T21:35:16.514Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"Python\"\n                }\n            ]\n        }\n    ]\n}"
+            },
+            {
+              "name": "Search templates by tags",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates?tags=example,template",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"],
+                  "query": [
+                    {
+                      "key": "tags",
+                      "value": "example,template"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 3\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Sample Template\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"class HelloWorld {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n            \"stdin\": \"input data\",\n            \"language\": \"java\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T13:50:57.155Z\",\n            \"updatedAt\": \"2024-11-03T13:50:57.155Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Sample Template 1\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"console.log('Hello, world!');\",\n            \"stdin\": \"input data\",\n            \"language\": \"javascript\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T14:57:38.155Z\",\n            \"updatedAt\": \"2024-11-03T14:57:38.155Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Sample Template 2\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"console.log('Hello, world!');\",\n            \"stdin\": \"input data\",\n            \"language\": \"javascript\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T14:58:19.130Z\",\n            \"updatedAt\": \"2024-11-03T14:58:19.130Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        }\n    ]\n}"
+            },
+            {
+              "name": "Search templates by multiple fields",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates?tags=Java&title=Python",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"],
+                  "query": [
+                    {
+                      "key": "tags",
+                      "value": "Java"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Python"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 0,\n        \"totalCount\": 0\n    },\n    \"data\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get templates as visitor",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/templates",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "templates"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get templates as visitor",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 4\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Sample Template\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"class HelloWorld {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\"); \\n    }\\n}\",\n            \"stdin\": \"input data\",\n            \"language\": \"java\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T13:50:57.155Z\",\n            \"updatedAt\": \"2024-11-03T13:50:57.155Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Sample Template 1\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"console.log('Hello, world!');\",\n            \"stdin\": \"input data\",\n            \"language\": \"javascript\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T14:57:38.155Z\",\n            \"updatedAt\": \"2024-11-03T14:57:38.155Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Sample Template 2\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"console.log('Hello, world!');\",\n            \"stdin\": \"input data\",\n            \"language\": \"javascript\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T14:58:19.130Z\",\n            \"updatedAt\": \"2024-11-03T14:58:19.130Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        },\n        {\n            \"id\": 4,\n            \"title\": \"Hello World\",\n            \"description\": \"Code for printing hello world in Python\",\n            \"code\": \"print(\\\"hello world!\\\")\",\n            \"stdin\": null,\n            \"language\": \"python\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T15:29:07.607Z\",\n            \"updatedAt\": \"2024-11-03T15:29:07.607Z\",\n            \"tamplateTags\": []\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get My Templates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/me/templates",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "me", "templates"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get my templates",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/me/templates",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "me", "templates"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "vary",
+                  "value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 03 Nov 2024 18:20:04 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 3\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Sample Template\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"print(\\\"Hello World YOooo!\\\")\",\n            \"stdin\": \"1\\n123\",\n            \"language\": \"java\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T13:50:57.155Z\",\n            \"updatedAt\": \"2024-11-03T15:38:06.542Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Sample Template 1\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"console.log('Hello, world!');\",\n            \"stdin\": \"input data\",\n            \"language\": \"javascript\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T14:57:38.155Z\",\n            \"updatedAt\": \"2024-11-03T14:57:38.155Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Sample Template 2\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"console.log('Hello, world!');\",\n            \"stdin\": \"input data\",\n            \"language\": \"javascript\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T14:58:19.130Z\",\n            \"updatedAt\": \"2024-11-03T14:58:19.130Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        }\n    ]\n}"
+            },
+            {
+              "name": "Search my templates",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/me/templates?title=sample",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "me", "templates"],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "sample"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "vary",
+                  "value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 03 Nov 2024 18:21:30 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 3\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Sample Template\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"print(\\\"Hello World YOooo!\\\")\",\n            \"stdin\": \"1\\n123\",\n            \"language\": \"java\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T13:50:57.155Z\",\n            \"updatedAt\": \"2024-11-03T15:38:06.542Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Sample Template 1\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"console.log('Hello, world!');\",\n            \"stdin\": \"input data\",\n            \"language\": \"javascript\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T14:57:38.155Z\",\n            \"updatedAt\": \"2024-11-03T14:57:38.155Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Sample Template 2\",\n            \"description\": \"A description of the sample template.\",\n            \"code\": \"console.log('Hello, world!');\",\n            \"stdin\": \"input data\",\n            \"language\": \"javascript\",\n            \"isForked\": false,\n            \"forkedFromId\": null,\n            \"userId\": 1,\n            \"createdAt\": \"2024-11-03T14:58:19.130Z\",\n            \"updatedAt\": \"2024-11-03T14:58:19.130Z\",\n            \"tamplateTags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"example\"\n                },\n                {\n                    \"id\": 2,\n                    \"tag\": \"template\"\n                }\n            ]\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Template",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Hello World\",\n    \"description\": \"Code for printing hello world in Python\",\n    \"code\": \"print(\\\"hello world!\\\")\",\n    \"language\": \"python\",\n    \"tags\": [\"Python\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/templates",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "templates"]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Template",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\": \"Hello World\",\n    \"description\": \"Code for printing hello world in Python\",\n    \"code\": \"print(\\\"hello world!\\\")\",\n    \"language\": \"python\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Hello World\",\n        \"description\": \"Code for printing hello world in Python\",\n        \"code\": \"print(\\\"hello world!\\\")\",\n        \"stdin\": null,\n        \"language\": \"python\",\n        \"isForked\": false,\n        \"forkedFromId\": null,\n        \"userId\": 1,\n        \"createdAt\": \"2024-10-31T21:35:16.514Z\",\n        \"updatedAt\": \"2024-10-31T21:35:16.514Z\",\n        \"tamplateTags\": []\n    }\n}"
+            },
+            {
+              "name": "Create template with tags",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\": \"Hello World 1\",\n    \"description\": \"Code for printing hello world in Python\",\n    \"code\": \"print(\\\"hello world!\\\")\",\n    \"language\": \"python\",\n    \"tags\": [\"Python\"]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 4,\n        \"title\": \"Hello World 1\",\n        \"description\": \"Code for printing hello world in Python\",\n        \"code\": \"print(\\\"hello world!\\\")\",\n        \"stdin\": null,\n        \"language\": \"python\",\n        \"isForked\": false,\n        \"forkedFromId\": null,\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-02T09:03:38.001Z\",\n        \"updatedAt\": \"2024-11-02T09:03:38.001Z\",\n        \"tamplateTags\": [\n            {\n                \"id\": 1,\n                \"tag\": \"Python\"\n            }\n        ]\n    }\n}"
+            },
+            {
+              "name": "Create template with stdin",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\": \"Hello World with stdin\",\n    \"description\": \"Code for printing hello world in Python\",\n    \"code\": \"print(\\\"hello world!\\\")\",\n    \"language\": \"python\",\n    \"stdin\": \"hello\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 7,\n        \"title\": \"Hello World 56\",\n        \"description\": \"Code for printing hello world in Python\",\n        \"code\": \"print(\\\"hello world!\\\")\",\n        \"stdin\": \"hello\",\n        \"language\": \"python\",\n        \"isForked\": false,\n        \"forkedFromId\": null,\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-02T09:05:40.906Z\",\n        \"updatedAt\": \"2024-11-02T09:05:40.906Z\",\n        \"tamplateTags\": []\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Template By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/templates/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "templates", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Template By Id",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"template\": {\n        \"id\": 1,\n        \"title\": \"Hello World\",\n        \"description\": \"Code for printing hello world in Python\",\n        \"code\": \"print(\\\"hello world!\\\")\",\n        \"stdin\": null,\n        \"language\": \"python\",\n        \"isForked\": false,\n        \"forkedFromId\": null,\n        \"userId\": 1,\n        \"createdAt\": \"2024-10-31T21:35:16.514Z\",\n        \"updatedAt\": \"2024-10-31T21:35:16.514Z\",\n        \"tamplateTags\": [\n            {\n                \"id\": 1,\n                \"tag\": \"Python\"\n            }\n        ]\n    },\n    \"blogPosts\": []\n}"
+            },
+            {
+              "name": "Invalid ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/abc",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "abc"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"Invalid template ID\"\n}"
+            },
+            {
+              "name": "Template doesn't exist",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/999",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "999"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"Template not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Template",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"code\": \"print(\\\"Hello World YOooo!\\\")\",\n    \"stdin\": \"1\\n123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/templates/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "templates", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Template",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"code\": \"print(\\\"Hello World YOooo!\\\")\",\n    \"stdin\": \"1\\n123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Hello World\",\n        \"description\": \"Code for printing hello world in Python\",\n        \"code\": \"print(\\\"Hello World YOooo!\\\")\",\n        \"stdin\": \"1\\n123\",\n        \"language\": \"python\",\n        \"isForked\": false,\n        \"forkedFromId\": null,\n        \"userId\": 1,\n        \"createdAt\": \"2024-10-31T23:57:14.037Z\",\n        \"updatedAt\": \"2024-11-02T09:07:57.449Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Fork Template",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/templates/1/fork",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "templates", "1", "fork"]
+            },
+            "description": "Make sure to fork using the new account, you can't fork your own template"
+          },
+          "response": [
+            {
+              "name": "Fork Template",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/11/fork",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "11", "fork"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Template forked successfully\"\n}"
+            },
+            {
+              "name": "Fork own template",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/1/fork",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "1", "fork"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"User cannot fork their own template\"\n}"
+            },
+            {
+              "name": "Duplicate fork",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/1/fork",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "1", "fork"]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"Unprocessable Entity\",\n    \"message\": \"UserId,title already in use\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Template",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/templates/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "templates", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete Template",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Template deleted successfully\"\n}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/11",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "11"]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"User is not authorized to delete template\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Template Blogs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/templates/1/blog-posts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "templates", "1", "blog-posts"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Template Blogs",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/1/blog-posts",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "1", "blog-posts"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 16,\n            \"title\": \"Getting Started with Templates\",\n            \"description\": \"An introductory guide on templates.\",\n            \"userId\": 2,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-02T09:16:19.011Z\",\n            \"updatedAt\": \"2024-11-02T09:16:19.011Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Execute Template",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/templates/4/execute",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "templates", "4", "execute"]
+            }
+          },
+          "response": [
+            {
+              "name": "Execute Template",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/templates/4/execute",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "templates", "4", "execute"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 30,\n        \"language\": \"python\",\n        \"code\": \"print(\\\"hello world!\\\")\",\n        \"stdin\": null,\n        \"compileStdout\": null,\n        \"compileStderr\": null,\n        \"isCompiled\": true,\n        \"stdout\": \"hello world!\\n\",\n        \"stderr\": \"\",\n        \"executionTimeMs\": 14,\n        \"compileTimeMs\": null,\n        \"exitCode\": 0,\n        \"status\": \"completed\",\n        \"userId\": 1,\n        \"createdAt\": \"2024-11-03T15:29:45.007Z\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Blog Posts",
+      "item": [
+        {
+          "name": "Create Blog Post",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"How to write Hello World\",\n    \"description\": \"Why should you write hello world?\",\n    \"tags\": [\"hello\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts"]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Blog Post",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\": \"How to Javascript\",\n    \"description\": \"Why should learn this tutorial?\",\n    \"tags\": [\"web\", \"react\"]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 17,\n    \"title\": \"How to Javascript\",\n    \"description\": \"Why should learn this tutorial?\",\n    \"userId\": 1,\n    \"isVisible\": true,\n    \"createdAt\": \"2024-11-02T09:18:08.088Z\",\n    \"updatedAt\": \"2024-11-02T09:18:08.088Z\",\n    \"tags\": [\n        {\n            \"id\": 5,\n            \"tag\": \"web\"\n        },\n        {\n            \"id\": 6,\n            \"tag\": \"react\"\n        }\n    ],\n    \"links\": []\n}"
+            },
+            {
+              "name": "Create blog post with links",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\": \"How to write Hello World\",\n    \"description\": \"Why should you write hello world?\",\n    \"tags\": [\"hello\"],\n    \"links\": [3]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 18,\n    \"title\": \"How to write Hello World\",\n    \"description\": \"Why should you write hello world?\",\n    \"userId\": 1,\n    \"isVisible\": true,\n    \"createdAt\": \"2024-11-02T09:19:58.692Z\",\n    \"updatedAt\": \"2024-11-02T09:19:58.692Z\",\n    \"tags\": [\n        {\n            \"id\": 2,\n            \"tag\": \"hello\"\n        }\n    ],\n    \"links\": [\n        {\n            \"id\": 3\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Blog Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Blog Posts by Title",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts?title=How",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "How"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-03T15:34:09.565Z\",\n            \"updatedAt\": \"2024-11-03T15:34:09.565Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"hello\"\n                }\n            ],\n            \"links\": [\n                {\n                    \"id\": 3\n                }\n            ],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        }\n    ]\n}"
+            },
+            {
+              "name": "Get Blog Posts by Description",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts?description=write",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"],
+                  "query": [
+                    {
+                      "key": "description",
+                      "value": "write"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-03T15:34:09.565Z\",\n            \"updatedAt\": \"2024-11-03T15:34:09.565Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"hello\"\n                }\n            ],\n            \"links\": [\n                {\n                    \"id\": 3\n                }\n            ],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        }\n    ]\n}"
+            },
+            {
+              "name": "Get Blog Posts by Tags",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts?tags=hello",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"],
+                  "query": [
+                    {
+                      "key": "tags",
+                      "value": "hello"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-03T15:34:09.565Z\",\n            \"updatedAt\": \"2024-11-03T15:34:09.565Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"hello\"\n                }\n            ],\n            \"links\": [\n                {\n                    \"id\": 3\n                }\n            ],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        }\n    ]\n}"
+            },
+            {
+              "name": "Get Blog Posts by Code Templates",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts?templateContent=console",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"],
+                  "query": [
+                    {
+                      "key": "templateContent",
+                      "value": "console"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-03T15:34:09.565Z\",\n            \"updatedAt\": \"2024-11-03T15:34:09.565Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"hello\"\n                }\n            ],\n            \"links\": [\n                {\n                    \"id\": 3\n                }\n            ],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        }\n    ]\n}"
+            },
+            {
+              "name": "Get Blog Posts (All)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-03T15:34:09.565Z\",\n            \"updatedAt\": \"2024-11-03T15:34:09.565Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"hello\"\n                }\n            ],\n            \"links\": [\n                {\n                    \"id\": 3\n                }\n            ],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        }\n    ]\n}"
+            },
+            {
+              "name": "Sort by ratings",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts?sortBy=rating",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "rating"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 2,\n        \"totalCount\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": false,\n            \"createdAt\": \"2024-10-31T22:53:05.448Z\",\n            \"updatedAt\": \"2024-11-01T22:43:16.302Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 1\n            },\n            \"netRating\": 1\n        },\n        {\n            \"id\": 2,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:00:43.489Z\",\n            \"updatedAt\": \"2024-10-31T23:00:43.489Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 4,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:09.315Z\",\n            \"updatedAt\": \"2024-10-31T23:01:09.315Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 5,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:21.555Z\",\n            \"updatedAt\": \"2024-10-31T23:01:21.555Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 6,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:44.209Z\",\n            \"updatedAt\": \"2024-10-31T23:01:44.209Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 7,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:54.326Z\",\n            \"updatedAt\": \"2024-10-31T23:01:54.326Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"to\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 8,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:56.607Z\",\n            \"updatedAt\": \"2024-10-31T23:01:56.607Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"to\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 9,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:04:11.282Z\",\n            \"updatedAt\": \"2024-10-31T23:04:11.282Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"to\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 10,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:06:09.024Z\",\n            \"updatedAt\": \"2024-10-31T23:06:09.024Z\",\n            \"tags\": [\n                {\n                    \"id\": 2,\n                    \"tag\": \"hello\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 11,\n            \"title\": \"Getting Started with Templates\",\n            \"description\": \"An introductory guide on templates.\",\n            \"userId\": 2,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:54:01.994Z\",\n            \"updatedAt\": \"2024-10-31T23:54:01.994Z\",\n            \"tags\": [\n                {\n                    \"id\": 3,\n                    \"tag\": \"guide\"\n                },\n                {\n                    \"id\": 4,\n                    \"tag\": \"templates\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 2\n            },\n            \"netRating\": 0\n        }\n    ]\n}"
+            },
+            {
+              "name": "Sort by controversial",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts?sortBy=controversial",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "controversial"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 2,\n        \"totalCount\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": false,\n            \"createdAt\": \"2024-10-31T22:53:05.448Z\",\n            \"updatedAt\": \"2024-11-01T22:43:16.302Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 1\n            },\n            \"netRating\": 1\n        },\n        {\n            \"id\": 2,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:00:43.489Z\",\n            \"updatedAt\": \"2024-10-31T23:00:43.489Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 3,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:00:51.803Z\",\n            \"updatedAt\": \"2024-10-31T23:00:51.803Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": -1\n        },\n        {\n            \"id\": 4,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:09.315Z\",\n            \"updatedAt\": \"2024-10-31T23:01:09.315Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 5,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:21.555Z\",\n            \"updatedAt\": \"2024-10-31T23:01:21.555Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 6,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:44.209Z\",\n            \"updatedAt\": \"2024-10-31T23:01:44.209Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 7,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:54.326Z\",\n            \"updatedAt\": \"2024-10-31T23:01:54.326Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"to\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 8,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:56.607Z\",\n            \"updatedAt\": \"2024-10-31T23:01:56.607Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"to\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 9,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:04:11.282Z\",\n            \"updatedAt\": \"2024-10-31T23:04:11.282Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"to\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 10,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:06:09.024Z\",\n            \"updatedAt\": \"2024-10-31T23:06:09.024Z\",\n            \"tags\": [\n                {\n                    \"id\": 2,\n                    \"tag\": \"hello\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get blog posts as visitor",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get blog posts as visitor",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 2,\n        \"totalCount\": 15\n    },\n    \"data\": [\n        {\n            \"id\": 18,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-02T09:19:58.692Z\",\n            \"updatedAt\": \"2024-11-02T09:19:58.692Z\",\n            \"tags\": [\n                {\n                    \"id\": 2,\n                    \"tag\": \"hello\"\n                }\n            ],\n            \"links\": [\n                {\n                    \"id\": 3\n                }\n            ],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 17,\n            \"title\": \"How to Javascript\",\n            \"description\": \"Why should learn this tutorial?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-02T09:18:08.088Z\",\n            \"updatedAt\": \"2024-11-02T09:18:08.088Z\",\n            \"tags\": [\n                {\n                    \"id\": 5,\n                    \"tag\": \"web\"\n                },\n                {\n                    \"id\": 6,\n                    \"tag\": \"react\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 16,\n            \"title\": \"Getting Started with Templates\",\n            \"description\": \"An introductory guide on templates.\",\n            \"userId\": 2,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-02T09:16:19.011Z\",\n            \"updatedAt\": \"2024-11-02T09:16:19.011Z\",\n            \"tags\": [\n                {\n                    \"id\": 3,\n                    \"tag\": \"guide\"\n                },\n                {\n                    \"id\": 4,\n                    \"tag\": \"templates\"\n                }\n            ],\n            \"links\": [\n                {\n                    \"id\": 3\n                }\n            ],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 14,\n            \"title\": \"Getting Started with Templates\",\n            \"description\": \"An introductory guide on templates.\",\n            \"userId\": 2,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:57:22.832Z\",\n            \"updatedAt\": \"2024-10-31T23:57:22.832Z\",\n            \"tags\": [\n                {\n                    \"id\": 3,\n                    \"tag\": \"guide\"\n                },\n                {\n                    \"id\": 4,\n                    \"tag\": \"templates\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 12,\n            \"title\": \"Getting Started with Templates\",\n            \"description\": \"An introductory guide on templates.\",\n            \"userId\": 2,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:56:09.248Z\",\n            \"updatedAt\": \"2024-10-31T23:56:09.248Z\",\n            \"tags\": [\n                {\n                    \"id\": 3,\n                    \"tag\": \"guide\"\n                },\n                {\n                    \"id\": 4,\n                    \"tag\": \"templates\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 11,\n            \"title\": \"Getting Started with Templates\",\n            \"description\": \"An introductory guide on templates.\",\n            \"userId\": 2,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:54:01.994Z\",\n            \"updatedAt\": \"2024-10-31T23:54:01.994Z\",\n            \"tags\": [\n                {\n                    \"id\": 3,\n                    \"tag\": \"guide\"\n                },\n                {\n                    \"id\": 4,\n                    \"tag\": \"templates\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 2\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 10,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:06:09.024Z\",\n            \"updatedAt\": \"2024-10-31T23:06:09.024Z\",\n            \"tags\": [\n                {\n                    \"id\": 2,\n                    \"tag\": \"hello\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 9,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:04:11.282Z\",\n            \"updatedAt\": \"2024-10-31T23:04:11.282Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"to\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 8,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:56.607Z\",\n            \"updatedAt\": \"2024-10-31T23:01:56.607Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"to\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 7,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:01:54.326Z\",\n            \"updatedAt\": \"2024-10-31T23:01:54.326Z\",\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"tag\": \"to\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update a Blog Post",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Understanding RESTful APIs\",\n    \"tags\": [\n        \"API\",\n        \"REST\",\n        \"Web Development\"\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "Update a Blog Post",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\": \"Understanding RESTful APIs\",\n    \"tags\": [\n        \"API\",\n        \"REST\",\n        \"Web Development\"\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Understanding RESTful APIs\",\n        \"description\": \"Why should you write hello world?\",\n        \"userId\": 1,\n        \"isVisible\": true,\n        \"createdAt\": \"2024-11-03T15:34:09.565Z\",\n        \"updatedAt\": \"2024-11-03T15:40:55.528Z\",\n        \"tags\": [\n            {\n                \"id\": 2,\n                \"tag\": \"API\"\n            },\n            {\n                \"id\": 3,\n                \"tag\": \"REST\"\n            },\n            {\n                \"id\": 4,\n                \"tag\": \"Web Development\"\n            }\n        ],\n        \"links\": [\n            {\n                \"id\": 3\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete a Blog Post",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete a Blog Post",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Blog post deleted successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Rate a Blog Post",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"rating\": \"-1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/1/rate",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "1", "rate"]
+            }
+          },
+          "response": [
+            {
+              "name": "Rate a Blog Post",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"rating\": \"-1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1/rate",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "1", "rate"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Blog post rated successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Blog Post by Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Blog Post by Id",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"How to write Hello World\",\n        \"description\": \"Why should you write hello world?\",\n        \"userId\": 1,\n        \"isVisible\": false,\n        \"createdAt\": \"2024-10-31T22:53:05.448Z\",\n        \"updatedAt\": \"2024-11-01T22:43:16.302Z\",\n        \"tags\": [],\n        \"links\": [],\n        \"_count\": {\n            \"ratings\": 1\n        }\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Create a Comment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"content\": \"Great post! Thanks for sharing.\",\n    \"parentId\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/1/comments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "1", "comments"]
+            }
+          },
+          "response": [
+            {
+              "name": "Create a Comment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"content\": \"Great post! Thanks for sharing.\",\n    \"parentId\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/2/comments",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "2", "comments"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 1,\n        \"content\": \"Great post! Thanks for sharing.\",\n        \"userId\": 1,\n        \"blogPostId\": 2,\n        \"parentId\": null,\n        \"isVisible\": true,\n        \"createdAt\": \"2024-11-03T15:45:18.899Z\",\n        \"updatedAt\": \"2024-11-03T15:45:18.899Z\"\n    }\n}"
+            },
+            {
+              "name": "Create a Comment Reply",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"content\": \"Great post! Thanks for sharing.\",\n    \"parentId\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/2/comments",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "2", "comments"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 2,\n        \"content\": \"Great post! Thanks for sharing.\",\n        \"userId\": 1,\n        \"blogPostId\": 2,\n        \"parentId\": 1,\n        \"isVisible\": true,\n        \"createdAt\": \"2024-11-03T15:50:07.088Z\",\n        \"updatedAt\": \"2024-11-03T15:50:07.088Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Comments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/2/comments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "2", "comments"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Comments",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/2/comments",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "2", "comments"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"content\": \"Great post! Thanks for sharing.\",\n            \"userId\": 1,\n            \"blogPostId\": 2,\n            \"parentId\": null,\n            \"isVisible\": false,\n            \"createdAt\": \"2024-11-03T15:45:18.899Z\",\n            \"updatedAt\": \"2024-11-03T15:51:52.873Z\",\n            \"netRating\": 0\n        }\n    ]\n}"
+            },
+            {
+              "name": "Get Comment Replies",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1/comments/1/replies",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "blog-posts",
+                    "1",
+                    "comments",
+                    "1",
+                    "replies"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 2\n    },\n    \"data\": [\n        {\n            \"id\": 2,\n            \"content\": \"Great post! Thanks for sharing.\",\n            \"userId\": 1,\n            \"blogPostId\": 2,\n            \"parentId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-03T15:50:07.088Z\",\n            \"updatedAt\": \"2024-11-03T15:50:07.088Z\",\n            \"netRating\": 0\n        },\n        {\n            \"id\": 3,\n            \"content\": \"Great post! Thanks for sharing.\",\n            \"userId\": 1,\n            \"blogPostId\": 2,\n            \"parentId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-03T15:50:24.204Z\",\n            \"updatedAt\": \"2024-11-03T15:50:24.204Z\",\n            \"netRating\": 0\n        }\n    ]\n}"
+            },
+            {
+              "name": "Get Comments by Ratings",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1/comments?sortBy=rating",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "1", "comments"],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "rating"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"content\": \"Great post! Thanks for sharing.\",\n            \"userId\": 1,\n            \"blogPostId\": 2,\n            \"parentId\": null,\n            \"isVisible\": false,\n            \"createdAt\": \"2024-11-03T15:45:18.899Z\",\n            \"updatedAt\": \"2024-11-03T15:51:52.873Z\",\n            \"netRating\": 0\n        }\n    ]\n}"
+            },
+            {
+              "name": "Get Comments by controversial",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/2/comments?sortBy=controversial",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "2", "comments"],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "controversial"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"content\": \"Great post! Thanks for sharing.\",\n            \"userId\": 1,\n            \"blogPostId\": 2,\n            \"parentId\": null,\n            \"isVisible\": false,\n            \"createdAt\": \"2024-11-03T15:45:18.899Z\",\n            \"updatedAt\": \"2024-11-03T15:51:52.873Z\",\n            \"netRating\": 0\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Rate a Comment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"rating\": \"+1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/1/comments/1/rate",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "1", "comments", "1", "rate"]
+            }
+          },
+          "response": [
+            {
+              "name": "Rate a Comment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"rating\": \"+1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1/comments/4/rate",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "blog-posts",
+                    "1",
+                    "comments",
+                    "4",
+                    "rate"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Comment rated successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete a Comment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/2/comments/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "2", "comments", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete a Comment",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/2/comments/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "2", "comments", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Blog post deleted successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update a Comment",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"content\": \"updated.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/2/comments/4",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "2", "comments", "4"]
+            }
+          },
+          "response": [
+            {
+              "name": "Update a Comment",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"content\": \"updated.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/2/comments/4",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "2", "comments", "4"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 4,\n        \"content\": \"updated.\",\n        \"userId\": 1,\n        \"blogPostId\": 2,\n        \"parentId\": null,\n        \"isVisible\": true,\n        \"createdAt\": \"2024-11-03T16:10:54.853Z\",\n        \"updatedAt\": \"2024-11-03T16:11:34.857Z\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ICR",
+      "item": [
+        {
+          "name": "Report a Blog Post",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"explanation\": \"This post contains offensive content.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/1/report",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "blog-posts", "1", "report"]
+            }
+          },
+          "response": [
+            {
+              "name": "Report a Blog Post",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"explanation\": \"This post contains offensive content.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1/report",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "blog-posts", "1", "report"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": 2,\n        \"explanation\": \"This post contains offensive content.\",\n        \"userId\": 1,\n        \"blogPostId\": 2,\n        \"commentId\": null,\n        \"status\": \"open\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Report a Comment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"explanation\": \"This comment contains offensive content.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/blog-posts/1/comments/5/report",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "blog-posts",
+                "1",
+                "comments",
+                "5",
+                "report"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Duplicate report",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"explanation\": \"This comment contains offensive content.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1/comments/4/report",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "blog-posts",
+                    "1",
+                    "comments",
+                    "4",
+                    "report"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "vary",
+                  "value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 03 Nov 2024 16:14:11 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"User has already reported this comment\"\n}"
+            },
+            {
+              "name": "Report a Comment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"explanation\": \"This comment contains offensive content.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/blog-posts/1/comments/5/report",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "blog-posts",
+                    "1",
+                    "comments",
+                    "5",
+                    "report"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "vary",
+                  "value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 03 Nov 2024 16:15:00 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 4,\n    \"explanation\": \"This comment contains offensive content.\",\n    \"userId\": 1,\n    \"blogPostId\": null,\n    \"commentId\": 5,\n    \"status\": \"open\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "View Reports",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/admin/reports",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "admin", "reports"]
+            }
+          },
+          "response": [
+            {
+              "name": "View Reports",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/admin/reports",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "admin", "reports"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 6\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"explanation\": \"This post contains inappropriate content.\",\n            \"userId\": 2,\n            \"blogPostId\": 1,\n            \"commentId\": null,\n            \"status\": \"closed\"\n        },\n        {\n            \"id\": 2,\n            \"explanation\": \"This comment contains inappropriate content.\",\n            \"userId\": 2,\n            \"blogPostId\": null,\n            \"commentId\": 1,\n            \"status\": \"open\"\n        },\n        {\n            \"id\": 3,\n            \"explanation\": \"This comment contains inappropriate content.\",\n            \"userId\": 2,\n            \"blogPostId\": null,\n            \"commentId\": 2,\n            \"status\": \"open\"\n        },\n        {\n            \"id\": 4,\n            \"explanation\": \"This post contains inappropriate content.\",\n            \"userId\": 2,\n            \"blogPostId\": 11,\n            \"commentId\": null,\n            \"status\": \"open\"\n        },\n        {\n            \"id\": 5,\n            \"explanation\": \"This post contains inappropriate content.\",\n            \"userId\": 1,\n            \"blogPostId\": 11,\n            \"commentId\": null,\n            \"status\": \"open\"\n        },\n        {\n            \"id\": 6,\n            \"explanation\": \"This comment contains inappropriate content.\",\n            \"userId\": 1,\n            \"blogPostId\": null,\n            \"commentId\": 1,\n            \"status\": \"open\"\n        }\n    ]\n}"
+            },
+            {
+              "name": "View reports by status",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/admin/reports?status=closed",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "admin", "reports"],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "closed"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 10,\n        \"pageCount\": 1,\n        \"totalCount\": 1\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"explanation\": \"This post contains inappropriate content.\",\n            \"userId\": 2,\n            \"blogPostId\": 1,\n            \"commentId\": null,\n            \"status\": \"closed\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Approve Report (Hide Post or Comment)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/admin/reports/1/approve",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "admin", "reports", "1", "approve"]
+            }
+          },
+          "response": [
+            {
+              "name": "Approve Report (Hide Post or Comment)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/admin/reports/1/approve",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "admin", "reports", "1", "approve"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Report successfully approved.\"\n}"
+            },
+            {
+              "name": "Duplicate approve",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/admin/reports/1/approve",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "admin", "reports", "1", "approve"]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": \"Report already closed.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Sort Blog Posts by Reports",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/admin/blog-posts?sortBy=report&sortDirection=desc&limit=3",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "admin", "blog-posts"],
+              "query": [
+                {
+                  "key": "sortBy",
+                  "value": "report"
+                },
+                {
+                  "key": "sortDirection",
+                  "value": "desc"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Sort Blog Posts by Reports",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/admin/blog-posts?sortBy=report&sortDirection=desc&limit=3",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "admin", "blog-posts"],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "report"
+                    },
+                    {
+                      "key": "sortDirection",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 3,\n        \"pageCount\": 6,\n        \"totalCount\": 16\n    },\n    \"data\": [\n        {\n            \"id\": 11,\n            \"title\": \"Getting Started with Templates\",\n            \"description\": \"An introductory guide on templates.\",\n            \"userId\": 2,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:54:01.994Z\",\n            \"updatedAt\": \"2024-10-31T23:54:01.994Z\",\n            \"tags\": [\n                {\n                    \"id\": 3,\n                    \"tag\": \"guide\"\n                },\n                {\n                    \"id\": 4,\n                    \"tag\": \"templates\"\n                }\n            ],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 2\n            },\n            \"netRating\": 0\n        },\n        {\n            \"id\": 1,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": false,\n            \"createdAt\": \"2024-10-31T22:53:05.448Z\",\n            \"updatedAt\": \"2024-11-01T22:43:16.302Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 1\n            },\n            \"netRating\": 1\n        },\n        {\n            \"id\": 2,\n            \"title\": \"How to write Hello World\",\n            \"description\": \"Why should you write hello world?\",\n            \"userId\": 1,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-10-31T23:00:43.489Z\",\n            \"updatedAt\": \"2024-10-31T23:00:43.489Z\",\n            \"tags\": [],\n            \"links\": [],\n            \"_count\": {\n                \"reports\": 0\n            },\n            \"netRating\": 0\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Sort Comments by Reports",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/admin/blog-posts/2/comments?sortBy=report&sortDirection=desc&limit=3",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "admin", "blog-posts", "2", "comments"],
+              "query": [
+                {
+                  "key": "sortBy",
+                  "value": "report"
+                },
+                {
+                  "key": "sortDirection",
+                  "value": "desc"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Sort by reports",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/admin/blog-posts/2/comments?sortBy=report&sortDirection=desc&limit=3",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "admin", "blog-posts", "2", "comments"],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "report"
+                    },
+                    {
+                      "key": "sortDirection",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "vary",
+                  "value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 03 Nov 2024 16:16:09 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"_metadata\": {\n        \"page\": 1,\n        \"perPage\": 3,\n        \"pageCount\": 1,\n        \"totalCount\": 2\n    },\n    \"data\": [\n        {\n            \"id\": 4,\n            \"content\": \"updated.\",\n            \"userId\": 1,\n            \"blogPostId\": 2,\n            \"parentId\": null,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-03T16:10:54.853Z\",\n            \"updatedAt\": \"2024-11-03T16:11:34.857Z\",\n            \"netRating\": 1\n        },\n        {\n            \"id\": 5,\n            \"content\": \"Great post! Thanks for sharing.\",\n            \"userId\": 1,\n            \"blogPostId\": 2,\n            \"parentId\": null,\n            \"isVisible\": true,\n            \"createdAt\": \"2024-11-03T16:14:53.175Z\",\n            \"updatedAt\": \"2024-11-03T16:14:53.175Z\",\n            \"netRating\": 0\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{TOKEN}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.sendRequest({",
+          "    url: 'http://localhost:3000/api/v1/auth/login',",
+          "    method: 'POST',",
+          "    header: {",
+          "        'content-type': 'application/json'",
+          "    },",
+          "    body: {",
+          "        mode: 'raw',",
+          "        raw: JSON.stringify({ \"email\": \"admin@example.com\", \"password\": \"LeFlop23\" })",
+          "    }",
+          "}, (err, res) => pm.collectionVariables.set(\"TOKEN\", res.json().data.accessToken));"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "TOKEN",
+      "value": ""
+    }
+  ]
+}
